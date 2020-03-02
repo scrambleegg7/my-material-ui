@@ -135,17 +135,15 @@ const Header = (props) => {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
 
-    const [value, setValue] = useState(0);
     const [anchorEl, setAnchorEl] = useState(null);
     const [ openMenu, setOpenMenu ] = useState(false);
-    const [selectedIndex, setSelectedIndex] = useState(0);
 
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
     const [openDrawer, setOpenDrawer] = useState(false);
 
 
     const handleChange = (e, value) => {
-        setValue(value);
+        props.setValue(value);
     }
 
     const handleClick = (e) => {
@@ -156,7 +154,7 @@ const Header = (props) => {
     const handleMenuItemClick = (e, i) => {
         setAnchorEl(null);
         setOpenMenu(false);
-        setSelectedIndex(i);
+        props.setSelectedIndex(i);
     }
 
     const handleClose = (e) => {
@@ -180,10 +178,10 @@ const Header = (props) => {
         [...menuOptions, ...routes].forEach(route => {
             switch (window.location.pathname) {
                 case `${route.link}`:
-                    if (value !== route.activeIndex) {
-                        setValue(route.activeIndex)
-                        if ( route.selectedIndex && route.selectedIndex !== selectedIndex ) {
-                            setSelectedIndex(route.selectedIndex)
+                    if (props.value !== route.activeIndex) {
+                        props.setValue(route.activeIndex)
+                        if ( route.selectedIndex && route.selectedIndex !== props.selectedIndex ) {
+                            props.setSelectedIndex(route.selectedIndex)
                         }
                     }
                     break;
@@ -194,11 +192,11 @@ const Header = (props) => {
 
         console.log("useEffect:", window.location.pathname )
 
-    }, [value, menuOptions, selectedIndex, routes ] )
+    }, [props.value, menuOptions, props.selectedIndex, routes, props ] )
 
     const tabs = (
         <React.Fragment>
-                        <Tabs indicatorColor="primary" value={value}  onChange={handleChange}  className={ classes.tabContainer}>
+                        <Tabs indicatorColor="primary" value={props.value}  onChange={handleChange}  className={ classes.tabContainer}>
 
                             {routes.map( (route, index)  => (
                                 <Tab key={`${route}${index}`} aria-owns = {route.ariaOwns }
@@ -222,11 +220,11 @@ const Header = (props) => {
                                     <MenuItem key={`${option}${i}`} component={Link} to={option.link} classes={ {root:classes.menuItem} } 
                                     onClick = { (e) => 
                                         {handleMenuItemClick(e, i); 
-                                        setValue(2); 
+                                            props.setValue(2); 
                                         handleClose(); 
-                                        console.log("option of menuitem ",option, value, i)
+                                        console.log("option of menuitem ",option, props.value, i)
                                     }} 
-                                    selected = { i === selectedIndex } >{option.name} 
+                                    selected = { i === props.selectedIndex } >{option.name} 
                                     </MenuItem>
                                 )
                             )}
@@ -244,9 +242,9 @@ const Header = (props) => {
                 <div className={classes.toolbarMargin} />
                 <List disablePadding>
                     {routes.map(((route,index)=> (
-                        <ListItem key={`${route}${index}`} onClick={ () => {setOpenDrawer(false); setValue(route.activeIndex);} } 
+                        <ListItem key={`${route}${index}`} onClick={ () => {setOpenDrawer(false); props.setValue(route.activeIndex);} } 
                             divider button component={Link}
-                            to={route.link} selected={value===route.activeIndex} 
+                            to={route.link} selected={props.value===route.activeIndex} 
                             classes={ {selected: classes.drawerItemSelected}}   >
                             <ListItemText disableTypography 
                                     className={classes.drawerItem}>{route.name}</ListItemText>
@@ -267,7 +265,7 @@ const Header = (props) => {
             <ElevationScroll>
                 <AppBar position="fixed" color="primary" className={classes.appBar}>
                     <Toolbar disableGutters>
-                        <Button component={Link} to="/"  className={classes.logoContainer} onClick={ () => setValue(0)  }   >
+                        <Button component={Link} to="/"  className={classes.logoContainer} onClick={ () => props.setValue(0)  }   >
                             <img src={cheater_logo} alt="company logo"   className={classes.logo} />  
                         </Button>
                         {matches ? drawer : tabs}
