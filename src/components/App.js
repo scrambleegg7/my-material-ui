@@ -3,6 +3,7 @@ import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/sty
 import Header from './ui/Header';
 import Footer from './ui/Footer';
 import theme from './ui/Theme';
+import Home from './ui/HomeAnimation';
 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
@@ -19,7 +20,7 @@ const App = () => {
                 setSelectedIndex={setSelectedIndex} />
                 
                 <Switch>
-                    <Route exact path="/" component={ () => <div>home</div> } />
+                    <Route exact path="/" component={ Home } />
                     <Route exact path="/usersetup" component={ () => <div>UserSetup</div> } />
                     <Route exact path="/board" component={ () => <div>board</div> } />
                     <Route exact path="/aboutus" component={ () => <div>aboutus</div> } />   
