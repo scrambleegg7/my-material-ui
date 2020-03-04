@@ -141,6 +141,9 @@ const Header = (props) => {
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
     const [openDrawer, setOpenDrawer] = useState(false);
 
+    const hanleLogoutButton = (e) => {
+        
+    }
 
     const handleChange = (e, value) => {
         props.setValue(value);
@@ -207,7 +210,7 @@ const Header = (props) => {
 
                         </Tabs>
 
-                        <Button variant="contained" color="secondary" className={classes.button}>
+                        <Button variant="contained" color="secondary" className={classes.button} onClick={}>
                             LOGOUT
                         </Button>
                         <Menu id="simple-menu" 
