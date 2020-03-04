@@ -21,6 +21,7 @@ const useStyles = makeStyles( theme => ({
     wave: {
         verticalAlign:"bottom",
         width:"10em",
+        marginLeft: "10%",
         [theme.breakpoints.down("md")]: {
             width:"21em",
         },
@@ -39,11 +40,12 @@ const useStyles = makeStyles( theme => ({
         textDecoration: "none",
     },
     gridItem: {
-        margin: "3em"
+        margin: "3em",
+        marginTop: "0.5em"
     },
     iconStyle: {
-        height: "5em",
-        width: "5em",
+        height: "3em",
+        width: "3em",
         [theme.breakpoints.down("xs")]: {
             height: "2.5em",
             width: "2.5em"
@@ -51,7 +53,8 @@ const useStyles = makeStyles( theme => ({
     },
     socialContainer: {
         position: "absolute",
-        marginTop: "-6em",
+        marginTop: "-4em",
+        marginLeft: "10%",
         right: "1.1em",
         [theme.breakpoints.down("xs")]: {
             right: "0.5em",

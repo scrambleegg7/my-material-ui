@@ -3,7 +3,7 @@ import React, { Component, useState } from 'react';
 import Lottie from 'react-lottie'
 import animationData from '../lotties/16778-cat2.json';
 import Typography from '@material-ui/core/Typography';
-i
+
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid'
@@ -24,7 +24,7 @@ const useStyles = makeStyles( theme => ({
         }
     },
     mainContainer: {
-        marginTop: "5em",
+        marginTop: "4em",
         [theme.breakpoints.down("md")]: {
             marginTop: "3em"
         },
@@ -34,9 +34,17 @@ const useStyles = makeStyles( theme => ({
     },
     myTextContainer: {
         minWidth: "21.5em",
-        minWidth: "   "
+        marginLeft: "1em",
+        [theme.breakpoints.down("xs")]: {
+            marginLeft: 0
+        }
     },
     animation: {
+        marginTop: "5em",
+        maxWidth: "30em",
+        minWidth: "21em",
+        marginTop: "2em",
+        marginLeft: "10%"
         
     }
 }));
@@ -62,20 +70,12 @@ const Home = () => {
             <Grid container direction="column" className={classes.mainContainer}>
                 <Grid item>
                     <Grid container direction="row" justify="flex-end" alignContent="center">
-                         <Grid sm item>
+                         <Grid sm item className={classes.myTextContainer}>
                              <Typography variant="h2" align="center">
-                             Cat technology ltd.<br/>
-                             MidWest 
+                             Miyuki Pharmacy (Cat) ltd.<br/>
+                             Itabashi, Tokyo
                              </Typography>
-                         </Grid>
-                         <Grid sm item className={classes.animation}>
-                            <Lottie options={defaultOptions}
-                                height={800}
-                                width={800}
-                                 isStopped={Stopped}
-                                isPaused={Paused}
-                            />
-                            <Grid container justify="center">
+                             <Grid container justify="center">
                                 <Grid item>
                                     <Button variant="contained" color="secondary" className={classes.button} onClick={ () => {setStopped(true)}}   >Stop</Button>
                                 </Grid>
@@ -86,6 +86,16 @@ const Home = () => {
                                     <Button variant="contained" color="secondary" className={classes.button} onClick={ () => {setPaused( !Paused )} }  > Puase    </Button>
                                 </Grid>
                             </Grid>
+
+
+                         </Grid>
+                         <Grid sm item className={classes.animation}>
+                            <Lottie options={defaultOptions}
+                                height={"100%"}
+                                width={"100%"}
+                                 isStopped={Stopped}
+                                isPaused={Paused}
+                            />
                          </Grid>
                     </Grid>
                 </Grid>

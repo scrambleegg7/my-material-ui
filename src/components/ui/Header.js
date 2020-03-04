@@ -210,7 +210,7 @@ const Header = (props) => {
 
                         </Tabs>
 
-                        <Button variant="contained" color="secondary" className={classes.button} onClick={}>
+                        <Button variant="contained" color="secondary" className={classes.button} onClick={hanleLogoutButton}>
                             LOGOUT
                         </Button>
                         <Menu id="simple-menu" 
