@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 
 import Lottie from 'react-lottie'
 import animationData from '../lotties/16778-cat2.json';
+import personalData from '../../assets/personalData.svg';
 import Typography from '@material-ui/core/Typography';
 
 import Button from '@material-ui/core/Button';
@@ -46,7 +47,21 @@ const useStyles = makeStyles( theme => ({
         marginTop: "2em",
         marginLeft: "10%"
         
-    }
+    }, 
+    icon: {
+        marginLeft: "2em",
+        marginTop: "3em",
+        maxWidth: "20em",
+        [theme.breakpoints.down("xs")]: {
+            marginLeft: 0, 
+        }
+    }, 
+    serviceContainer: {
+        marginTop: "12em",
+        [theme.breakpoints.down("sm")]: {
+          padding: 25
+        }
+      },
 }));
    
 const Home = () => {
@@ -70,36 +85,33 @@ const Home = () => {
             <Grid container direction="column" className={classes.mainContainer}>
                 <Grid item>
                     <Grid container direction="row" justify="flex-end" alignContent="center">
-                         <Grid sm item className={classes.myTextContainer}>
-                             <Typography variant="h2" align="center">
-                             Miyuki Pharmacy (Cat) ltd.<br/>
-                             Itabashi, Tokyo
+                        <Grid sm item className={classes.myTextContainer}>
+                             <Typography variant="h3" align="center">
+                             みゆき薬局<br/>
+                             板橋区, 東京
                              </Typography>
-                             <Grid container justify="center">
-                                <Grid item>
-                                    <Button variant="contained" color="secondary" className={classes.button} onClick={ () => {setStopped(true)}}   >Stop</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" color="secondary" className={classes.button} onClick={ () => {setStopped(false)}}   >Play</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" color="secondary" className={classes.button} onClick={ () => {setPaused( !Paused )} }  > Puase    </Button>
-                                </Grid>
-                            </Grid>
-
-
-                         </Grid>
-                         <Grid sm item className={classes.animation}>
+                        </Grid>
+                        <Grid sm item className={classes.animation}>
                             <Lottie options={defaultOptions}
-                                height={"100%"}
-                                width={"100%"}
-                                 isStopped={Stopped}
-                                isPaused={Paused}
+                                height={"50%"}
+                                width={"50%"}
                             />
-                         </Grid>
+                        </Grid>
+                    </Grid>
+
+
+                    <Grid container direction="row">
+                        <Grid item>
+                            <Typography variant="h3">サービスについて</Typography>
+                            <Typography variant="subtitle1">お薬手帳</Typography>
+                        </Grid>
+                        <Grid item>
+                            <img className={classes.icon} alt="drug note icon" src={personalData} />
+                        </Grid>                        
                     </Grid>
                 </Grid>
             </Grid>
+            
 
         </div>
     )

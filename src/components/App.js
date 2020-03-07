@@ -4,6 +4,8 @@ import Header from './ui/Header';
 import Footer from './ui/Footer';
 import theme from './ui/Theme';
 import Home from './ui/HomeAnimation';
+import LandingPage from './LandingPage';
+import Board from './ui/Board';
 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
@@ -20,9 +22,9 @@ const App = () => {
                 setSelectedIndex={setSelectedIndex} />
                 
                 <Switch>
-                    <Route exact path="/" component={ Home } />
+                    <Route exact path="/" component={ LandingPage } />
                     <Route exact path="/usersetup" component={ () => <div>UserSetup</div> } />
-                    <Route exact path="/board" component={ () => <div>board</div> } />
+                    <Route exact path="/board" component={ Board } />
                     <Route exact path="/aboutus" component={ () => <div>aboutus</div> } />   
                     <Route exact path="/create" component={ () => <div>create board</div> } />   
                                      
