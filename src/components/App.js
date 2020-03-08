@@ -4,8 +4,10 @@ import Header from './ui/Header';
 import Footer from './ui/Footer';
 import theme from './ui/Theme';
 import Home from './ui/HomeAnimation';
+import Create from './ui/Create';
 import LandingPage from './LandingPage';
 import Board from './ui/Board';
+import UserSetup from './ui/UserSetup';
 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
@@ -23,10 +25,10 @@ const App = () => {
                 
                 <Switch>
                     <Route exact path="/" component={ LandingPage } />
-                    <Route exact path="/usersetup" component={ () => <div>UserSetup</div> } />
+                    <Route exact path="/usersetup" component={ UserSetup } />
                     <Route exact path="/board" component={ Board } />
                     <Route exact path="/aboutus" component={ () => <div>aboutus</div> } />   
-                    <Route exact path="/create" component={ () => <div>create board</div> } />   
+                    <Route exact path="/create" component={ Create } />   
                                      
                 </Switch>
 

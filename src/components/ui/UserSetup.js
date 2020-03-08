@@ -36,6 +36,10 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 
 
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+
 const styles = theme => ({
     mainContainer: {
         marginTop: "4em",
@@ -78,7 +82,7 @@ const styles = theme => ({
 
 
 
-class Board extends Component {
+class UserSetup extends Component {
 
     constructor(props) {
         super(props)
@@ -89,6 +93,7 @@ class Board extends Component {
             errors: null,
             expanded: null,
             user_id: null,
+            anchorEl: null,
         }            
     }
 
@@ -117,17 +122,25 @@ class Board extends Component {
         this.setState({
             expanded: !this.state.expanded,
 
-            [e]: !this.state[e]
+            [e]: !this.state[e], 
+
+            anchorEl: true
             
         });        
       };
     
     handleClick = (event) => { // 引数追加
-        this.setState({ open: true, anchorEl: event.currentTarget });
+        this.setState({ 
+            open: true, 
+            anchorEl: event.currentTarget,
+            expanded: !this.state.expanded,
+         });
+        
     };
 
     handleClose = () => {
-        this.setState({ open: false, anchorEl: null }); // 追加
+        this.setState({ 
+            anchorEl: null }); 
     };        
 
     render () {
@@ -136,15 +149,16 @@ class Board extends Component {
         const users = this.state.users;
         const isLoading = this.state.isLoading;
         const expanded = this.state.expanded;
+        const anchorEl = this.state.anchorEl;
 
         const { classes } = this.props;
 
-        console.log("Board users", users)
+        console.log("UserSetup users", users)
 
         return (
             <div>
 
-                <Typography variant="h2">Board</Typography>
+                <Typography variant="h2">UserSetup</Typography>
                 <hr />
                 {  !isLoading ?  ( 
                     users.map( user => { 
@@ -184,27 +198,31 @@ class Board extends Component {
                                 <ShareIcon />
                                 </IconButton>
                                 <IconButton
+                                   
+                                    aria-haspopup="true"
+                                    aria-owns={anchorEl ? "simple-menu" : null}
                                     className={clsx(classes.expand, {
                                         [classes.expandOpen]: expanded,
                                     })}
-                                    onClick={this.handleExpandClick.bind(this, user.id.value)    }
+                                    onClick={ this.handleClick }
                                     aria-expanded={expanded}
                                     aria-label="show more"
                                     >
                                     <ExpandMoreIcon />
                                 </IconButton>
                             </CardActions>
-                            <Collapse in={this.state[user.id.value]} timeout="auto" unmountOnExit key={user.id.value}>
-                                <Divider />
-                                <List component="div" disablePadding>
-                                <ListItem button className={classes.menuItem}>
-                                    <ListItemText inset   >My name is {user.name.last}  </ListItemText> 
-                                </ListItem>
-                                <ListItem button className={classes.menuItem}>
-                                    <ListItemText inset primary="Nested Page 2" />
-                                </ListItem>
-                                </List>
-                            </Collapse>
+                                
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={this.handleClose}
+                                >
+                                    <MenuItem onClick={this.handleClose}>Edit</MenuItem>
+                                    <MenuItem onClick={this.handleClose}>Delete</MenuItem>
+                                    <MenuItem onClick={this.handleClose}>Share</MenuItem>
+                                </Menu>
                             </Card> 
                             </div>                       )
                     })
@@ -222,4 +240,4 @@ class Board extends Component {
 }
 
 
-export default withStyles(styles)( Board );
+export default withStyles(styles)( UserSetup );
